@@ -16,4 +16,11 @@ RUN pacman -Syu --noconfirm \
 
 RUN git clone https://github.com/NvChad/starter ~/.config/nvim --depth 1
 
-CMD ["nvim"]
+RUN python3 -m venv /root/.venv \
+    && source /root/.venv/bin/activate \
+    && python3 -m pip install --upgrade pip setuptools \
+    && python3 -m pip install norminette \
+    && echo "export PATH=\$PATH:/root/.venv/bin" >> /root/.shrc \
+    && deactivate
+
+CMD ["/bin/bash", "-c", "source /root/.shrc && nvim"]

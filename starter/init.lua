@@ -5,8 +5,8 @@ vim.g.mapleader = " "
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
 if not vim.uv.fs_stat(lazypath) then
-  local repo = "https://github.com/folke/lazy.nvim.git"
-  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
+	local repo = "https://github.com/folke/lazy.nvim.git"
+	vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
 end
 
 vim.opt.rtp:prepend(lazypath)
@@ -15,14 +15,14 @@ local lazy_config = require "configs.lazy"
 
 -- load plugins
 require("lazy").setup({
-  {
-    "NvChad/NvChad",
-    lazy = false,
-    branch = "v2.5",
-    import = "nvchad.plugins",
-  },
+	{
+		"NvChad/NvChad",
+		lazy = false,
+		branch = "v2.5",
+		import = "nvchad.plugins",
+	},
 
-  { import = "plugins" },
+	{ import = "plugins" },
 }, lazy_config)
 
 -- load theme
@@ -33,9 +33,22 @@ require "options"
 require "nvchad.autocmds"
 
 vim.schedule(function()
-  require "mappings"
+	require "mappings"
 end)
 
--- dans ton custom/chadrc.lua
-vim.opt.number = true          -- Active les numéros de ligne
-vim.opt.relativenumber = true  -- Si tu veux aussi les numéros relatifs, rajoute ça ! 🦋
+function NorminetteQuickfixTelescope()
+	    vim.cmd("!python3 ~/.config/nvim/parse.py > /quickfix_list.lua")
+    vim.cmd("cfile /quickfix_list.lua")
+    require('telescope.builtin').quickfix()
+end
+
+
+function NorminetteQuickfixDirect()
+    vim.cmd("silent! !python3 ~/.config/nvim/parse.py > /quickfix_list.lua")
+    vim.cmd("cfile /quickfix_list.lua")
+    vim.cmd("vert copen")
+    vim.cmd("vertical resize 50")
+end
+
+vim.api.nvim_set_keymap('n', '<leader>q', ':lua NorminetteQuickfixTelescope()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>Q', ':lua NorminetteQuickfixDirect()<CR>', { noremap = true, silent = true })
