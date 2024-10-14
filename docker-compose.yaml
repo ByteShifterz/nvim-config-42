@@ -1,0 +1,10 @@
+services:
+  nvim:
+    build: .
+    container_name: nvim
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./starter:/root/.config/nvim
+      - ${PWD}:/root/workspace
+    working_dir: /root/workspace
