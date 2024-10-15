@@ -24,3 +24,5 @@ cmp.setup({
 })
 
 map('t', '<ESC>', [[<C-\><C-n>]], { noremap = true, silent = true })
+map('n', '<leader><Tab>', '<C-w>w')
+map('n', '<leader><S-Tab>', '<C-w>W')
