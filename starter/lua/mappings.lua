@@ -23,5 +23,4 @@ cmp.setup({
   mapping = cmp.mapping.preset.insert(custom_mappings),
 })
 
-
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+map('t', '<ESC>', [[<C-\><C-n>]], { noremap = true, silent = true })
