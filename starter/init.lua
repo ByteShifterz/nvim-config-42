@@ -36,16 +36,19 @@ vim.schedule(function()
 	require "mappings"
 end)
 
+vim.api.nvim_set_keymap('n', '<F2>', ':MasonInstallAll<CR>', { noremap = true, silent = true })
+require('lazy.view.config').keys.close = '<Esc>'
+
 function NorminetteQuickfixTelescope()
-	    vim.cmd("!python3 ~/.config/nvim/parse.py > /quickfix_list.lua")
-    vim.cmd("cfile /quickfix_list.lua")
+	    vim.cmd("!python3 ~/.config/nvim/parse.py > /tmp/quickfix_list.lua")
+    vim.cmd("cfile /tmp/quickfix_list.lua")
     require('telescope.builtin').quickfix()
 end
 
 
 function NorminetteQuickfixDirect()
-    vim.cmd("silent! !python3 ~/.config/nvim/parse.py > /quickfix_list.lua")
-    vim.cmd("cfile /quickfix_list.lua")
+    vim.cmd("silent! !python3 ~/.config/nvim/parse.py > /tmp/quickfix_list.lua")
+    vim.cmd("cfile /tmp/quickfix_list.lua")
     vim.cmd("vert copen")
     vim.cmd("vertical resize 50")
 end
