@@ -7,7 +7,7 @@ def parse_norminette_output(output):
 
     for line in output.splitlines():
         # Vérifier si la ligne indique un fichier
-        file_match = re.match(r"(\w+\.(c|h)): Error!", line)
+        file_match = re.match(r"([\w\/]+\.(c|h)): Error!", line)
         if file_match:
             current_file = file_match.group(1)
             continue
