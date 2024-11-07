@@ -36,7 +36,9 @@ vim.schedule(function()
 	require "mappings"
 end)
 
-vim.api.nvim_set_keymap('n', '<F2>', ':MasonInstallAll<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>m1', ':MasonInstallAll<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>m2', ':Stdheader<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>m3', ':so ~/.config/nvim/lua/options.lua<CR>', { noremap = true, silent = true })
 require('lazy.view.config').keys.close = '<Esc>'
 
 function NorminetteQuickfixTelescope()
